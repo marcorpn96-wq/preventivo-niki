@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niki Beach Club – Modulo Prenotazione</title>
+    <!-- Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Jost:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Collegamento al file CSS -->
+    <link rel="stylesheet" href="style.css">
+    <meta name="robots" content="noindex,nofollow">
+</head>
+
+<body>
+    <div class="page">
+        <div class="actions-bar" style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
+            <button id="btn-salva" class="btn-print" type="button" style="background-color: #2b7a8c;">💾 Salva
+                Preventivo</button>
+            <button id="btn-carica" class="btn-clear" type="button">📂 Carica Preventivo</button>
+        </div>
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo-area">
+                <img src="img/logofooter.png" alt="Logo Niki Beach Club" class="logo">
+            </div>
+            <div class="contact-info">
+                Viale della Riviera 104,<br>
+                65123 Pescara, Italia<br>
+                info@beachclubniki.it<br>
+                In caso di maggiori informazioni, 085\4680100
+            </div>
+        </div>
+
+        <!-- FORM BODY -->
+        <div class="form-body">
+
+            <!-- CLIENT INFO GRID -->
+            <div class="client-grid">
+                <div class="field-cell">
+                    <label>Cliente</label>
+                    <input type="text" id="cliente" placeholder="Nome e cognome">
+                </div>
+                <div class="field-cell">
+                    <label>Persone</label>
+                    <input type="number" id="persone" min="1" max="500" placeholder="N°" style="max-width:80px">
+                </div>
+                <div class="field-cell">
+                    <label>Telefono</label>
+                    <input type="tel" id="telefono" placeholder="339 0000000">
+                </div>
+                <div class="field-cell">
+                    <label>Data <span id="giorno-settimana" style="font-weight: normal; color: #000000;"></span></label>
+                    <input type="date" id="data">
+                </div>
+                <div class="field-cell">
+                    <label>E-mail</label>
+                    <input type="email" id="email" placeholder="email@esempio.it">
+                </div>
+                <div class="field-cell">
+                    <label>Ora</label>
+                    <input type="time" id="ora">
+                </div>
+            </div>
+
+            <!-- OPTIONS SECTION -->
+            <div class="options-grid">
+                <div class="option-field">
+                    <label class="table-header">Ambiente</label>
+                    <select id="ambiente">
+                        <option value="">Seleziona...</option>
+                        <option value="Terrazza">Terrazza</option>
+                        <option value="Piscina">Piscina</option>
+                        <option value="Palmette">Palmette</option>
+                        <option value="Veranda">Veranda</option>
+                        <option value="Interno">Interno</option>
+                    </select>
+                </div>
+
+                <div class="option-field">
+                    <label class="table-header">Area</label>
+                    <select id="area">
+                        <option value="">Seleziona...</option>
+                        <option value="Riservata">Riservata</option>
+                        <option value="Non Riservata">Non Riservata</option>
+                    </select>
+                </div>
+
+                <div class="option-field">
+                    <label class="table-header">Pasto</label>
+                    <select id="pasto">
+                        <option value="">Seleziona...</option>
+                        <option value="Pranzo">Pranzo</option>
+                        <option value="Pomeriggio">Pomeriggio</option>
+                        <option value="Cena">Cena</option>
+                    </select>
+                </div>
+
+                <div class="option-field">
+                    <label class="table-header">Servizio</label>
+                    <select id="servizio">
+                        <option value="">Seleziona...</option>
+                        <option value="Servito">Servito</option>
+                        <option value="Buffet">Buffet</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- MENU SELECT -->
+            <div class="menu-container">
+                <div class="menu-header">Menu</div>
+                <div class="menu-body">
+                    <select id="menu">
+                        <option value="">Seleziona un'opzione...</option>
+                        <option value="mare">Menu Mare</option>
+                        <option value="mare">Menu Mare + Finger Food di Benvenuto</option>
+                        <option value="terra">Menu di Terra</option>
+                        <option value="terra">Menu di Terra + Finger Food di Benvenuto</option>
+                        <option value="pinsabambini">Giropinsa Bimbi</option>
+                        <option value="pinsa">Giropinsa</option>
+                        <option value="festabambinispiaggia">Festa Bimbi Spiaggia</option>
+                        <option value="festabambinipalmetta">Festa Bimbi Palmetta</option>
+                        <option value="aperitivo">Aperitivo</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- TABLE -->
+            <div class="table-header">
+                <div>Descrizione</div>
+            </div>
+
+            <div class="table-body" id="table-body"></div>
+
+            <button class="add-row-btn" type="button">+ Aggiungi voce</button>
+
+            <div id="beverages-section" style="margin-top: 24px;"></div>
+
+            <p class="note" id="menu-note"> • Acqua, caffè e coperto inclusi</p>
+
+            <div id="reserved-section" class="optional-section" style="margin-top:8px;">
+                <div class="reserved-row">
+                    <div class="reserved-label-wrap">
+                        <div class="reserved-label">Area Riservata in Esclusiva</div>
+                        <button type="button" class="remove-btn remove-section-btn"
+                            data-remove-section="reserved">✕</button>
+                    </div>
+                    <div class="price-input-wrap">
+                        <span>€</span>
+                        <input type="text" id="area-esclusiva" inputmode="decimal" placeholder="0,00"
+                            class="input-esclusiva">
+                    </div>
+                </div>
+            </div>
+            <button id="restore-reserved-btn" class="restore-section-btn" type="button" style="display:none;">↻
+                Ripristina Area Riservata</button>
+
+            <div id="notes-section" class="optional-section" style="margin-top:16px;">
+                <div class="optional-section-header">
+                    <div class="optional-section-title">Note</div>
+                    <button type="button" class="remove-btn remove-section-btn" data-remove-section="notes">✕</button>
+                </div>
+                <div class="note-row">
+                    <label>Note</label>
+                    <textarea id="note" placeholder="Note aggiuntive..."></textarea>
+                </div>
+            </div>
+            <button id="restore-notes-btn" class="restore-section-btn" type="button" style="display:none;">↻ Ripristina
+                Note</button>
+
+            <div id="prezzo-persona-section" class="totale-row" style="gap:10px;">
+                <button type="button" class="remove-btn remove-section-btn" data-remove-section="prezzo-persona" style="padding:0 8px;">✕</button>
+                <div class="totale-label">Prezzo a persona</div>
+                <div class="totale-value">
+                    <span>€</span>
+                    <input type="text" id="prezzo-persona" inputmode="decimal" placeholder="0,00">
+                </div>
+            </div>
+            <button id="restore-prezzo-persona-btn" class="restore-section-btn" type="button" style="display:none; margin-top:8px;">↻ Ripristina Prezzo a persona</button>
+            <div id="prezzo-persona-2-section" class="totale-row" style="gap:10px;">
+                <button type="button" class="remove-btn remove-section-btn" data-remove-section="prezzo-persona-2" style="padding:0 8px;">✕</button>
+                <div class="totale-label">Prezzo a persona (adulti)</div>
+                <div class="totale-value">
+                    <span>€</span>
+                    <input type="text" id="prezzo-persona-2" inputmode="decimal" placeholder="0,00">
+                </div>
+            </div>
+            <button id="restore-prezzo-persona-2-btn" class="restore-section-btn" type="button" style="display:none; margin-top:8px;">↻ Ripristina Prezzo a persona</button>
+
+            <div id="prezzo-persona-3-section" class="totale-row" style="gap:10px; margin-top:8px;">
+                <button type="button" class="remove-btn remove-section-btn" data-remove-section="prezzo-persona-3" style="padding:0 8px;">✕</button>
+                <div class="totale-label">Prezzo a persona (ragazzi)</div>
+                <div class="totale-value">
+                    <span>€</span>
+                    <input type="text" id="prezzo-persona-3" inputmode="decimal" placeholder="0,00">
+                </div>
+            </div>
+            <button id="restore-prezzo-persona-3-btn" class="restore-section-btn" type="button" style="display:none; margin-top:8px;">↻ Ripristina Prezzo a persona</button>
+
+            <div class="totale-row">
+                <div class="totale-label">Totale</div>
+                <div class="totale-value">
+                    <span>€</span>
+                    <input type="text" id="totale-display" inputmode="decimal" placeholder="0,00">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
